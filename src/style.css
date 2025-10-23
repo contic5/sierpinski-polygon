@@ -8,4 +8,9 @@ main
     margin: auto;
     max-width: 800px;
     min-height: 100vh;
+    padding: 10px;
+}
+canvas
+{
+    border: rgb(113, 113, 113) solid 5px;
 }
