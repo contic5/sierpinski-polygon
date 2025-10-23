@@ -7,9 +7,21 @@
     <title>sierpinski-polygon</title>
   </head>
   <body>
+    <main>
     <h1>Sierpinski Polygon</h1>
+    <div>
+    <label for="sides">Sides</label>
+    <input id="sides" type="range" min="3" max="13" value="3">
+    <b id="sides_value">3</b>
+    </div>
+
     <p>Work in Progress</p>
     <canvas id="my_canvas" width="500" height="500">
+    </main>
     <script type="module" src="/src/main.js"></script>
+    <script type="module">
+    import {setup} from "/src/main.js";
+    document.getElementById("sides").onchange=setup;
+    </script>
   </body>
 </html>

@@ -21,18 +21,12 @@ function draw_polygon(points,depth)
 
 function create_polygon(center,radius,depth=0)
 {
-  lowest_point=Math.min(lowest_point,center[1]);
-  highest_point=Math.max(highest_point,center[1]);
-
   let points=[];
   for(let i=0;i<sides;i++)
   {
     let angle=(2*Math.PI*i)/sides;
     let x=Math.round(radius*Math.cos(angle+offset_radians)+center[0]);
     let y=Math.round(radius*Math.sin(angle+offset_radians)+center[1]);
-    lowest_point=Math.min(lowest_point,y);
-    highest_point=Math.min(highest_point,y);
-
     points.push([x,y]);
   }
   draw_polygon(points,depth);
@@ -57,8 +51,8 @@ function generate_smaller_polygons(center,radius,depth)
 
   for(let k=1;k<=sides;k++)
   {
-    let x=(1-scale_factor)*radius*Math.cos((2*Math.PI*k)/sides+offset_radians)+center[0];
-    let y=(1-scale_factor)*radius*Math.sin((2*Math.PI*k)/sides+offset_radians)+center[1];
+    let x=(1-scale_factor)*radius*Math.cos((2*Math.PI*k)/sides)+center[0];
+    let y=(1-scale_factor)*radius*Math.sin((2*Math.PI*k)/sides)+center[1];
 
     console.log(x+" "+y);
     create_polygon([x,y],scale_factor*radius,depth+1);
@@ -73,43 +67,19 @@ function draw()
 {
   clear();
   //ctx.rotate(offset_degrees*Math.PI/180);
-  //ctx.translate(0,c.height/8);
   create_polygon([c.width/2,c.height/2],original_radius)
-
-  ctx.fillStyle="#000000";
-  ctx.fillRect(c.width/2-20,c.height/2-20,40,40);
-
-  //ctx.translate(0,-c.height/8);
   //ctx.rotate(-offset_degrees*Math.PI/180);
-
 }
-export function setup()
+function setup()
 {
-  sides=parseInt(document.getElementById("sides").value);
-  document.getElementById("sides_value").innerHTML=sides;
-
-  if(sides%2==0&&false)
-  {
-    offset_degrees=90/sides+60;
-  }
-  else
-  {
-    offset_degrees=90/sides;
-  }
-  offset_radians=offset_degrees*Math.PI/180;
-  //offset_radians=0;
   draw();
 }
 
 let colors=["#ff0000","#00ff00","#0000ff"];
-colors=["#6076d6ff","#3e4d91ff","#262f59ff"];
 let c=document.getElementById("my_canvas");
 let ctx=c.getContext("2d");
 let original_radius=c.width/2;
 let sides=3;
-let offset_degrees=0;
-let offset_radians=0;
-let lowest_point=9999;
-let highest_point=-9999;
-let polygons=[];
+let offset_degrees=30;
+let offset_radians=offset_degrees*Math.PI/180;
 setup();

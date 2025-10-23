@@ -1,0 +1,11 @@
+body
+{
+    background-color: black;
+}
+main
+{
+    background-color: aliceblue;
+    margin: auto;
+    max-width: 800px;
+    min-height: 100vh;
+}
