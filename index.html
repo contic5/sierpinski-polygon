@@ -9,19 +9,35 @@
   <body>
     <main>
     <h1>Sierpinski Polygon</h1>
+
+    <div>
+    <label for="max_depth">Max Depth</label>
+    <input id="max_depth" type="range" min="1" max="4" value="4">
+    <b id="max_depth_value">3</b>
+    </div>
+
+    <div>
+    <label for="min_draw_depth">Min Draw Depth</label>
+    <input id="min_draw_depth" type="range" min="1" max="4" value="1">
+    <b id="min_draw_depth_value">1</b>
+    </div>
+
+
     <div>
     <label for="sides">Sides</label>
     <input id="sides" type="range" min="3" max="13" value="5">
     <b id="sides_value">3</b>
     </div>
 
-    <p>Work in Progress</p>
+    <p>This website draws various Sierpinski Polygons</p>
     <canvas id="my_canvas" width="500" height="500">
     </main>
     <script type="module" src="/src/main.js"></script>
     <script type="module">
     import {setup} from "/src/main.js";
     document.getElementById("sides").onchange=setup;
+    document.getElementById("max_depth").onchange=setup;
+    document.getElementById("min_draw_depth").onchange=setup;
     </script>
   </body>
 </html>
