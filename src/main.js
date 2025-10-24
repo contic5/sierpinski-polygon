@@ -1,6 +1,7 @@
 import './style.css'
 import javascriptLogo from './javascript.svg'
 import viteLogo from '/vite.svg'
+import { color_patterns } from './colors';
 
 //Class that store a polygon, including its center, each point on the polygon and the recursion depth the polygon was created at.
 class Polygon
@@ -31,7 +32,7 @@ class Polygon
   draw()
   {
 
-    //Only draw polygons if they are at least a certain depth.
+    //Only draw polygons if they are at least a certain depth. Doing so allows for more drawing variety.
     if(this.depth<min_draw_depth)
     {
       return;
@@ -142,7 +143,7 @@ function calculate_offset()
 //Erase everything on the screen.
 function clear()
 {
-  ctx.fillStyle="#000000ff";
+  ctx.fillStyle=background_color;
   ctx.fillRect(0,0,c.width,c.height);
 }
 function draw()
@@ -186,11 +187,21 @@ export function setup()
   document.getElementById("max_depth_value").innerHTML=max_depth;
 
   min_draw_depth=parseInt(document.getElementById("min_draw_depth").value);
-  //Make sure that the min draw depth is not greater than the max depth.
 
+  //Make sure that the min draw depth is not greater than the max depth.
   min_draw_depth=Math.min(max_depth,min_draw_depth);
   document.getElementById("min_draw_depth").value=min_draw_depth;
   document.getElementById("min_draw_depth_value").innerHTML=min_draw_depth;
+
+  color_index=parseInt(document.getElementById("color_pattern").value);
+  if(isNaN(color_index))
+  {
+    color_index=0;
+  }
+  console.log(color_index);
+  colors=color_patterns[color_index]["colors"];
+
+  background_color=document.getElementById("background_color").value;
 
   //Rotate the polygon if it has an odd number of sides.
   offset_degrees=0;
@@ -202,9 +213,17 @@ export function setup()
   draw();
 }
 
+
+//Color pattern index
+let color_index=0;
+
 //Colors for the pattern
-let colors=["#ff0000","#ff8c00","#ffff00","#11ff00ff","#0088ffff"];
-//colors=["#6f88f7ff","#5a6ec8ff","#3e4d91ff","#262f59ff"];
+console.log(color_patterns[color_index]);
+let colors=color_patterns[color_index]["colors"];
+
+//Background Color
+let background_color="#000000";
+
 let c=document.getElementById("my_canvas");
 let ctx=c.getContext("2d");
 

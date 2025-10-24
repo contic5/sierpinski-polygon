@@ -4,29 +4,47 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
     <title>sierpinski-polygon</title>
   </head>
   <body>
     <main>
-    <h1>Sierpinski Polygon</h1>
+    <h1 class="title is-1">Sierpinski Polygon</h1>
 
-    <div>
+    <div class="fixed-grid has-1-cols">
+    <div class="grid">
+    <div class="cell">
     <label for="max_depth">Max Depth</label>
     <input id="max_depth" type="range" min="1" max="4" value="4">
     <b id="max_depth_value">3</b>
     </div>
 
-    <div>
+    <div class="cell">
     <label for="min_draw_depth">Min Draw Depth</label>
     <input id="min_draw_depth" type="range" min="1" max="4" value="1">
     <b id="min_draw_depth_value">1</b>
     </div>
 
 
-    <div>
+    <div class="cell">
     <label for="sides">Sides</label>
     <input id="sides" type="range" min="3" max="13" value="5">
     <b id="sides_value">3</b>
+    </div>
+
+    <div class="cell">
+    <label for="background_color">Background Color</label>
+    <input id="background_color" type="color">
+    </div>
+
+    <div class="cell">
+    <label for="color_pattern">Color Pattern</label>
+    <select id="color_pattern" class="select">
+    
+    </select>
+    </div>
+    </div>
     </div>
 
     <p>This website draws various Sierpinski Polygons</p>
@@ -35,9 +53,24 @@
     <script type="module" src="/src/main.js"></script>
     <script type="module">
     import {setup} from "/src/main.js";
+    import { color_patterns } from '/src/colors.js';
+    function load_color_patterns()
+    {
+      for(let i=0;i<color_patterns.length;i++)
+      {
+        let option=document.createElement("option");
+        option.innerHTML=color_patterns[i]["name"];
+        option.value=i;
+        document.getElementById("color_pattern").appendChild(option);
+      }
+    }
     document.getElementById("sides").onchange=setup;
     document.getElementById("max_depth").onchange=setup;
     document.getElementById("min_draw_depth").onchange=setup;
+    document.getElementById("color_pattern").onchange=setup;
+    document.getElementById("background_color").onchange=setup;
+
+    load_color_patterns();
     </script>
   </body>
 </html>
