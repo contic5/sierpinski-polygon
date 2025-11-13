@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/sierpinski-polygon/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+    <title>sierpinski-polygon</title>
+    <script type="module" crossorigin src="/sierpinski-polygon/assets/index-Pd8OQGzA.js"></script>
+    <link rel="stylesheet" crossorigin href="/sierpinski-polygon/assets/index-5rZX-LEs.css">
+  </head>
+  <body>
+    <main class="content">
+    <h1 class="title is-1">Sierpinski Polygon</h1>
+
+    <h2 class="subtitle is-2">About</h2>
+    <p>The Sierpinski Polygon is a fractal made from a polygon. A polygon is a shape with sides that have the same length. The Sierpinski Polygon is a fractal that repeatedly makes smaller versions of a larger polygon. Depth refers to how many times we went from the original polygon to smaller polygons. The original polygon has depth 1, the first smaller polygons have depth 2 and so on.</p>
+
+    <p>Drawing the Sierpinski Polygon has several steps. The first step is creating the original polygon. The original polygon has each point equally spread apart from the canvas center and each other. With n sides, Vertex i is located at x=center_x-size*cos(i/(2PI*n)) y=center_y-size*sin(i/(2PI*n)).</p>
+
+    <p>Afterwards, we determine where to place each smaller polygon. I use an advanced formula to calculate the new center and the new size. With n sides, Vertex i is located at x=new_center_x-new_size*cos(i/(2PI*n)) y=new_center_y-new_size*sin(i/(2PI*n)). Now though, center_x and center_y are the centers of the new polygon. This article explains more about how scaling and positioning are calculated: <a href="https://larryriddle.agnesscott.org/ifs/pentagon/sierngon.htm">https://larryriddle.agnesscott.org/ifs/pentagon/sierngon.htm</a></p>
+
+    <p>We then create the smaller polygons in the same way as the original polygon. Afterwards, we can create smaller polygons from the smaller polygons.</p>
+
+    <p>To draw each polygon, I move to the first vertex in the polygon. I then draw a line from vertex 1 to vertex 2, vertex 2 to vertex 3 and finally vertex n to vertex 1. I then fill in the space inside the lines I made.</p>
+    <p>I can change the pattern by only drawing polygons at a certain depth.</p>
+
+    <h2 class="subtitle is-2">Settings</h2>
+    <div class="fixed-grid has-1-cols">
+    <div class="grid">
+    <div class="cell">
+    <label for="max_depth">Max Depth</label>
+    <input id="max_depth" type="range" min="1" max="4" value="4">
+    <b id="max_depth_value">3</b>
+    </div>
+
+    <div class="cell">
+    <label for="min_draw_depth">Min Draw Depth</label>
+    <input id="min_draw_depth" type="range" min="1" max="4" value="1">
+    <b id="min_draw_depth_value">1</b>
+    </div>
+
+
+    <div class="cell">
+    <label for="sides">Sides</label>
+    <input id="sides" type="range" min="3" max="13" value="5">
+    <b id="sides_value">3</b>
+    </div>
+
+    <div class="cell">
+    <label for="background_color">Background Color</label>
+    <input id="background_color" type="color">
+    </div>
+
+    <div class="cell">
+    <label for="color_pattern">Color Pattern</label>
+    <select id="color_pattern" class="select">
+    
+    </select>
+    </div>
+    </div>
+    </div>
+
+    <h2 class="subtitle is-2">The Polygon</h2>
+    <canvas id="my_canvas" width="500" height="500">
+    </main>
+  </body>
+</html>
